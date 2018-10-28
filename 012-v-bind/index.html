@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <title>테스트</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <!-- attr은 {{}} 이런 구문을 쓸수 없으니 변화 시키려면 v-bind를 사용해야한다. -->
+        <!-- v-bind: =>shortcut : -->
+        <div id="app" >
+            <div v-bind:id='dynamicId'></div>
+            <button :disabled='isButtonDisabled'>Button</button>
+        </div>
+        <script src="index.js"></script>
+    </body>
+</html>
