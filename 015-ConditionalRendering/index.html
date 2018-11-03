@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <title>테스트</title>
+        <!-- Vue.js -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <style>
+            .static{
+                border: 1px solid #d9d9d9;
+            }
+            .active{
+                background-color: aquamarine;
+            }
+            .text-danger{
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- if else -->
+        <div id="app">
+            <div v-if="Math.random() > 0.5">
+                Now you see me
+            </div>
+            <div v-else>
+                Now you don't
+            </div>
+            
+        </div>
+        <!-- if else template reusable -->
+        <div id="reusable">
+            <template v-if="loginType === 'username'">
+                <label>Username</label>
+                <input placeholder="Enter your username"/>
+            </template>
+            <template v-else>
+                <label>Email</label>
+                <input placeholder="Enter your email address"/>
+            </template>
+            <button @click='toggle'>toggle</button>
+        </div>
+        <!-- if else key template unique-->
+        <div id="unique">
+            <template v-if="loginType === 'username'">
+                <label>Username</label>
+                <input placeholder="Enter your username" key="username-input"/>
+            </template>
+            <template v-else>
+                <label>Email</label>
+                <input placeholder="Enter your email address" key="email-input"/>
+            </template>
+            <button @click='toggle'>toggle</button>
+        </div>
+        <!-- display none ... -->
+        <div id="show">
+            <input v-show="ok"/>
+            <button @click='toggle'>toggle</button>
+        </div>
+        <script src="index.js"></script>
+        
+    </body>
+</html>

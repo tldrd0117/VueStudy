@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <title>테스트</title>
+        <!-- Vue.js -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <style>
+            .static{
+                border: 1px solid #d9d9d9;
+            }
+            .active{
+                background-color: aquamarine;
+            }
+            .text-danger{
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="target" class='static' v-bind:class="{ active: isActive, 'text-danger': hasError }">
+            HELLO
+        </div>
+
+        <div id="target2" v-bind:class="classObject">
+            HELLO2
+        </div>
+
+        <div id="target3" v-bind:class="classObject">
+            COMPUTED HELLO
+        </div>
+
+        <div id="target4" v-bind:class="[activeClass, errorClass]">
+            ARRAY SYNTAX HELLO
+        </div>
+
+        <div id="target5" v-bind:class="[{ active: isActive }, errorClass]"> 
+            CONDITIONAL HELLO
+        </div>
+        <div id="components-demo">
+            <my-component class="baz boo"></my-component>
+        </div>
+
+        <div id='style1' v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }">
+            style1
+        </div>
+
+        <div id="style2" v-bind:style="styleObject">
+            style2
+        </div>
+
+        <div id="overringStyles" v-bind:style="[baseStyles, overringStyles]">
+            overringStyles
+        </div>
+
+        <script src="index.js"></script>
+        
+    </body>
+</html>

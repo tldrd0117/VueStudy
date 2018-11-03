@@ -1,0 +1,69 @@
+<html>
+    <head>
+        <title>테스트</title>
+        <!-- Vue.js -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        
+    </head>
+    <body>
+        <ul id='example-1'>
+            <li v-for="item in items">
+                {{ item.message }}
+            </li>
+        </ul>
+
+        <ul id='example-2'>
+            <li v-for="(item, index) in items">
+                {{ parentMessage }} - {{ index }} - {{ item.message }}
+            </li>
+        </ul>
+
+        <ul id='v-for-object' class='demo'>
+            <li v-for="value in object">
+                {{ value }}
+            </li>
+        </ul>
+        <div id="even">
+            <li v-for="n in evenNumbers">{{ n }}</li>
+        </div>
+        <div id="even2">
+            <li v-for="n in even(numbers)">{{ n }}</li>
+        </div>
+        <!-- range -->
+        <div id="range">
+            <span v-for="n in 10">{{n}}</span>
+        </div>
+
+        <ul id="template">
+            <template v-for="item in items">
+                <li>{{ item.msg }}</li>
+                <li class="divider" role="presentation"></li>
+            </template>
+        </ul>
+
+        <div id="todo-list-example">
+            <form @submit.prevent="addNewTodo">
+                <label for="new-todo">Add a todo</label>
+                <input
+                    v-model="newTodoText"
+                    id="new-todo"
+                    placeHolder="E.g. Feed the cat"
+                />
+                <button>Add</button>
+            </form>
+            <ul>
+                <li
+                    is="todo-item"
+                    v-for="(todo, index) in todos"
+                    v-bind:key="todo.id"
+                    v-bind:title="todo.title"
+                    @remove="todos.splice(index, 1)">
+
+                </li>
+            </ul>
+        </div>
+
+        <script src="index.js"></script>
+        
+    </body>
+</html>

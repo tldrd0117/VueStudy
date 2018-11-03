@@ -1,11 +1,15 @@
 <html>
     <head>
         <title>테스트</title>
+        <!-- Vue.js -->
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <!-- axios request -->
+        <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+        <!-- lodash utils -->
+        <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+
     </head>
     <body>
-        <!-- attr은 {{}} 이런 구문을 쓸수 없으니 변화 시키려면 v-bind를 사용해야한다. -->
-        <!-- v-bind: =>shortcut : -->
         <div id="app" >
             
             <p>Original message: "{{ message }}"</p>
@@ -14,6 +18,15 @@
             <p>Methord reversed message: "{{ reversedMessage2() }}"</p>
 
         </div>
+        <div id="watch-example">
+            <p>
+                Ask a yes/no question:
+                <input v-model="question">
+            </p>
+            <p>{{ answer }}</p>
+        </div>
+
         <script src="index.js"></script>
+        
     </body>
 </html>
