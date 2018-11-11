@@ -1,0 +1,233 @@
+<html>
+    <head>
+        <title>테스트</title>
+        <!-- Vue.js -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <!-- lodash -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
+
+        <style>
+            /* v-enter 애니메이션 시작 */
+            /* v-enter-active 애니메이션 동작 */
+            /* v-enter-to 애니메이션 끝 */
+            /* v-leave 애니메이션 시작 */
+            /* v-leave-active 애니메이션 동작 */
+            /* v-leave-to 애니메이션 끝 */
+            /* enter 애니메이션이 나타날때 */
+            /* leave 애니세이션이 사라질떄 */
+            .fade-enter-active, .fade-leave-active{
+                transition: opacity .5s;
+            }
+            .fade-enter, .fade-leave-to{
+                opacity: 0;
+            }
+
+            /* css Animation */
+            .bounce-enter-active {
+                animation: bounce-in .5s;
+            }
+            .bounce-leave-active {
+                animation: bounce-in .5s reverse;
+            }
+            @keyframes bounce-in {
+                0% {
+                    transform: scale(0);
+                }
+                50% {
+                    transform: scale(1.5);
+                }
+                100% {
+                    transform: scale(1);
+                }
+            }
+            .component-fade-enter-active, .component-fade-leave-active {
+                transition: opacity .3s ease;
+            }
+            .component-fade-enter, .component-fade-leave-to
+                /* .component-fade-leave-active below version 2.1.8 */ {
+                opacity: 0;
+            }
+            
+            .list-item {
+                display: inline-block;
+                margin-right: 10px;
+            }
+            .list-enter-active, .list-leave-active {
+                transition: all 1s;
+            }
+            .list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            .list-complete-item {
+                transition: all 1s;
+                display: inline-block;
+                margin-right: 10px;
+            }
+            .list-complete-enter, .list-complete-leave-to
+                /* .list-complete-leave-active below version 2.1.8 */ {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            .list-complete-leave-active {
+                position: absolute;
+            }
+
+        </style>
+        <!-- custom transition classes -->
+        <!-- https://daneden.github.io/animate.css/ -->
+        <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
+
+    </head>
+    <body>
+        <div id='demo'>
+            <button @click="show = !show">
+                Toggle
+            </button>
+            <transition name="fade">
+                <p v-if="show">hello</p>
+            </transition>
+        </div>
+
+        <div id="example-2">
+            <button @click="show = !show">Toggle show</button>
+            <transition name="bounce">
+                <p v-if="show">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris facilisis enim libero, at lacinia diam fermentum id. Pellentesque habitant morbi tristique senectus et netus.</p>
+            </transition>
+        </div>
+
+        <div id="example-3">
+            <button @click="show = !show">
+                Toggle render
+            </button>
+            <transition
+                name="custom-classes-transition"
+                enter-active-class="animated tada"
+                leave-active-class="animated bounceOutRight"
+            >
+                <p v-if="show">hello</p>
+            </transition>
+        </div>
+
+        <!-- transition component -->
+        <div id="transition-components-demo">
+            <input id="A" type='radio' value="v-a" name="comp" checked v-model="view">
+            <label for="A">A</label>
+            <input id="B" type='radio' value="v-b" name="comp" v-model="view">
+            <label for="B">B</label>
+            <transition name="component-fade" mode="out-in">
+                <component v-bind:is="view"></component>
+            </transition>
+        </div>
+
+        <div id="list-demo">
+            <button v-on:click="add">Add</button>
+            <button v-on:click="remove">Remove</button>
+            <transition-group name="list" tag="p">
+                <span 
+                    v-for="item in items"
+                    v-bind:key="item"
+                    class="list-item">
+                    {{ item }}
+                </span>
+            </transition-group>
+        </div>
+
+        <div id="list-complete-demo" class="demo">
+            <button @click="shuffle">Shuffle</button>
+            <button @click="add">Add</button>
+            <button @click="remove">Remove</button>
+            <transition-group name="list-complete" tag="p">
+                <span
+                    v-for="item in items"
+                    v-bind:key="item"
+                    class="list-complete-item"
+                >
+                    {{ item }}
+                </span>
+            </transition-group>
+        </div>
+
+        <script>
+            new Vue({
+                el:'#demo',
+                data: {
+                    show: true
+                }
+            })
+
+            new Vue({
+                el: '#example-2',
+                data: {
+                    show: true
+                }
+            })
+
+            new Vue({
+                el: '#example-3',
+                data: {
+                    show: true
+                }
+            })
+
+            new Vue({
+                el: '#transition-components-demo',
+                data: {
+                    view: 'v-a'
+                },
+                components: {
+                    'v-a': {
+                    template: '<div>Component A</div>'
+                    },
+                    'v-b': {
+                    template: '<div>Component B</div>'
+                    }
+                }
+            })
+
+            new Vue({
+                el: '#list-demo',
+                data: {
+                    items: [1,2,3,4,5,6,7,8,9],
+                    nextNum: 10
+                },
+                methods: {
+                    randomIndex: function(){
+                        return Math.floor(Math.random() * this.items.length)
+                    },
+                    add: function(){
+                        this.items.splice(this.randomIndex(), 0, this.nextNum++)
+                    },
+                    remove: function(){
+                        this.items.splice(this.randomIndex(), 1)
+                    }
+                }
+            })
+
+            new Vue({
+                el: '#list-complete-demo',
+                data: {
+                    items: [1,2,3,4,5,6,7,8,9],
+                    nextNum: 10
+                },
+                methods: {
+                    randomIndex: function(){
+                        return Math.floor(Math.random() * this.items.length)
+                    },
+                    add: function(){
+                        this.items.splice(this.randomIndex(), 0, this.nextNum++)
+                    },
+                    remove: function(){
+                        this.items.splice(this.randomIndex(), 1)
+                    },
+                    shuffle: function(){
+                        this.items = _.shuffle(this.items);
+                    }
+                }
+            })
+        </script>
+
+        
+    </body>
+</html>

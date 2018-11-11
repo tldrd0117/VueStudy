@@ -32,6 +32,26 @@
             </div>
         </div>
 
+        <div id="custom-input-demo">
+            <custom-input v-model="searchText"></custom-input>
+            <div>{{searchText}}</div>
+        </div>
+        <div id="alert-demo">
+            <alert-box>Something bad happend</alert-box>
+        </div>
+
+        <div id="tabs-demo">
+            <tab-button 
+                v-for="(tab, index) in tabs"
+                :key="index"
+                :tabname="tab"
+                :settab="setCurrentTab"
+            ></tab-button>
+            <tab-content
+                :currenttab="currentTab"
+            ></tab-content>
+        </div>
+
         <script src="index.js"></script>
 
         
